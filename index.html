@@ -8,33 +8,24 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <!-- Chat section -->
     <section class="chat__section">
+        <!-- Branding -->
         <div class="brand">
             <img height="40" src="bubble-chat.png" alt="logo" >
             <h1>Chat</h1>
         </div>
+        <!-- Message area -->
         <div class="message__area">
-            <div class="incoming message">
-                <h4>Neelima</h4>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-            </div>
-            <div class="outgoing message">
-                <h4>Friend</h4>
-                <p>Qui consequatur voluptates praesentium expedita exercitationem molestiae consectetur est!.</p>
-            </div>
-            <div class="outgoing message">
-                <h4>Friend</h4>
-                <p>Qui consequatur voluptates praesentium consectetur est!.</p>
-            </div>
-            <div class="outgoing message">
-                <h4>Friend</h4>
-                <p>Reiciendis adipisci, voluptatem recusandae sunt nobis pariatur.</p>
-            </div>
         </div>
+        <!-- Input area for message -->
         <div>
             <textarea name="text" id="textarea" cols="30"  rows="1" placeholder="Write a message..." ></textarea>
         </div>
     </section>
+    <!-- Socket.IO library -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Client-side script -->
     <script src="./client.js"></script>
 </body>
 </html>

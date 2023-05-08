@@ -49,15 +49,17 @@ textarea {
 }
 
 .message {
-    padding: 20px; 
+    padding: 10px; 
     border-radius: 4px; 
     margin-bottom: 40px;
     max-width: 300px;
     position: relative;
+    word-wrap: break-word;
 }
 .incoming {
     background: #8F8BE8;
     color: #fff;  
+    margin-right: auto;
 }
 .outgoing {
     background: #e9eafd;
