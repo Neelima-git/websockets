@@ -1,11 +1,19 @@
 // create a socket connection to the server
 const socket = io();
 
-// prompt user to enter their name
+// prompt user to enter their name and room
 let userName;
+let roomName;
 do {
     userName = prompt("Please enter your name: ");
 } while (!userName);
+
+do {
+    roomName = prompt("Please enter the room name: ");
+} while (!roomName);
+
+// emit joinRoom event to the server with the room name
+socket.emit('joinRoom', roomName);
 
 // get references to the textarea and message area elements
 let textarea = document.querySelector("#textarea");
@@ -22,21 +30,26 @@ textarea.addEventListener('keyup', (e) => {
 function sendMessage(message) {
     let msg = {
         user: userName,
-        message: message.trim()
+        message: message.trim(),
+        room: roomName
     }
     // append the message to the UI with 'outgoing' style
-    appendMessage(msg, 'outgoing');
+    if (msg.user !== userName) {
+        appendMessage(msg, 'outgoing');
+    }
     scrollToBottom();
     textarea.value = '';
 
     // send the message to the server
     socket.emit('message', msg);
+
+    console.log(`Message sent: ${msg.message}`);
 }
 
 // append a message to the UI with the specified style
-function appendMessage(msg, type) {
+function appendMessage(msg) {
     let mainDiv = document.createElement("div");
-    let className = type;
+    let className = msg.user === userName ? 'outgoing' : 'incoming';
     mainDiv.classList.add(className, 'message');
 
     let markUp = `

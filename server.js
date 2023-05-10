@@ -22,13 +22,29 @@ app.get('/', (req, res) => {
 // setup socket.io
 const io = require('socket.io')(http);
 
-// handle socket connections
 io.on('connection', (socket) => {
     console.log('Connected...');
 
-    // handle message events from clients
-    socket.on('message', (msg) => {
-        // broadcast the message to all clients except the sender
-        socket.broadcast.emit('message', msg);
-    })
-})
+    let room;
+
+// handle message events from clients
+socket.on('message', (msg) => {
+    // broadcast the message to all clients in the same room except the sender
+    socket.to(msg.room).emit('message', msg);
+    console.log(`Message from ${msg.user}: ${msg.message}`);
+});
+
+
+    // handle join room events from clients
+    socket.on('joinRoom', (roomName) => {
+        // leave any existing rooms
+        socket.leaveAll();
+
+        // join the specified room
+        socket.join(roomName);
+        room = roomName;
+
+        console.log(`${socket.id} joined room ${room}`);
+    });
+});
+
