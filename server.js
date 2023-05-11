@@ -20,7 +20,10 @@ app.get('/', (req, res) => {
 });
 
 // setup socket.io
-const io = require('socket.io')(http);
+const io = require('socket.io')(http, {
+    transports: ['websocket']
+  });
+  
 
 io.on('connection', (socket) => {
     console.log('Connected...');

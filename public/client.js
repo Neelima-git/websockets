@@ -1,5 +1,7 @@
 // create a socket connection to the server
-const socket = io();
+const socket = io({
+    transports: ['websocket']
+  });  
 
 // prompt user to enter their name and room
 let userName;
